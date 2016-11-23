@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <form action='' method='get'>
+      {{ model_filter }}
+      <button class="btn btn-primary" type="submit">Применить</button>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-stripped">
+      <caption>Список самосвалов</caption>
+      <thead>
+        <tr>
+          <th>Бортовой номер</th>
+          <th>Модель</th>
+          <th>Макс. грузоподъемность</th>
+          <th>Текущий вес</th>
+          <th>Перегруз, %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for truck in trucks %}
+        <tr>
+          <td><a href="{% url 'update-truck' truck.id %}">{{ truck.number }}</a></td>
+          <td>{{ truck.model__title }}</td>
+          <td>{{ truck.model__capacity }}</td>
+          <td>{{ truck.current_load }}</td>
+          <td>{{ truck.overload }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
